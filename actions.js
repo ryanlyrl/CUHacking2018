@@ -40,3 +40,21 @@ function enterText(field, text){
 		}
 	});
 }
+
+function openTab(){
+	chrome.tabs.create();
+}
+
+function closeTab(){
+	chrome.tabs.remove(chrome.tabs.getCurrent().index);
+}
+
+function switchTab(){
+	chrome.tabs.query({currentWindow: true, active: true}, function(tabsArray) {
+    	if( tabsArray.length < 2 ) return;
+    	chrome.tabs.query({index: (tabsArray[0].index+1)}, function(nextTabsArray){
+        	if( nextTabsArray.length < 1 ) return;
+        	chrome.tabs.update(nextTabsArray[0].id, {active: true})
+    	});  
+	});
+}
