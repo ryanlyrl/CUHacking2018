@@ -1,6 +1,8 @@
 function clickButton(buttonText){
-	$(document).ready(function(){
-		console.log("jQuery Extension running...");
+	$("a").each(function() {
+		if($(this).html().toLowerCase() == buttonText.toLowerCase){
+			$(this).click();
+		}
 	});
 }
 
@@ -16,8 +18,25 @@ function goTo(text){
 	}
 }
 
-function browserForwardBackwrards
+function prevPage(){
+	window.history.back();
+}
 
-function enterText(text, field){
-	
+function nextPage(){
+	window.history.forward();
+}
+
+function enterText(field, text){
+	$("input").each(function(){
+		var foundField;
+		$.each(this.attrbutes, function(){
+			if(this.value.toLowerCase().includes(field.toLowerCase)){
+				foundField = this;
+				return false;
+			}
+		});
+		if(foundField){
+			foundField.val(text);
+		}
+	});
 }
