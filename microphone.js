@@ -117,7 +117,7 @@ function doAction(s){
   }
 
   for(var i=0; i< temp.length; i++){
-    //console.log(temp);
+    console.log(temp);
     if(commands.get(temp[i]) != undefined){
       if(temp.length == 1){
         commands.get(temp[i])();
@@ -126,8 +126,15 @@ function doAction(s){
       }
       else if(temp.length == 2){
         if(commands.get(temp[i]) == clickButton){
+          if(lengthButton(temp[1]) == 1){
+            commands.get(temp[0])(temp[1],0);
+            return;
+          }
           button_temp = temp[1];
           //startButton();
+          var alertAudio = new Audio('alertAudio.mp3');
+          alertAudio.play();
+          delay(500);
           recognition.stop();
           recognizing = false;
           //final_transcript = '';

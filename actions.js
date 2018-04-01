@@ -23,6 +23,27 @@ function clickButton(buttonText, index){
 	// }
 }
 
+function lengthButton (buttonText){
+	var matches = [];
+	$("a").each(function() {	
+		if($(this).text().toLowerCase().includes(buttonText.toLowerCase())){
+			//console.log($(this).text() + " clicked.");
+			matches.push($(this));
+			//$(this)["0"].click();
+			//return;
+		}
+	});
+
+	$("button").each(function(){
+		if($(this).text().toLowerCase().includes(buttonText.toLowerCase())){
+			//$(this)["0"].click();
+			matches.push($(this));
+		}
+	});
+	return matches.length;
+
+}
+
 function buttonPress(num){
 	console.log(num + " adsa pressed!");
 }
