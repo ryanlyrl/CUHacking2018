@@ -1,32 +1,44 @@
 function clickButton(buttonText){
-	console.log("clicked");
-	$("a").each(function() {
-		console.log($(this).html());
-		if($(this).html().includes(buttonText)){
-			$(this).click();
+	var matches = [];
+	$("a").each(function() {	
+		if($(this).text().toLowerCase().includes(buttonText.toLowerCase())){
+			//console.log($(this).text() + " clicked.");
+			matches.push($(this));
+			//$(this)["0"].click();
+			//return;
 		}
 	});
 
 	$("button").each(function(){
-		if($(this).text().toLowerCase().includes(buttonText)){
-			$(this).click();
+		if($(this).text().toLowerCase().includes(buttonText.toLowerCase())){
+			//$(this)["0"].click();
+			matches.push($(this));
 		}
 	});
+
+	matches[0]["0"].click();
+	//}
+	// for(i = 0;i < matches.length;i++){
+	// 	matches[i]["0"].click();
+	// }
 }
 
-function buttonPress(){
-	console.log("pressed!");
+function buttonPress(num){
+	console.log(num + " adsa pressed!");
 }
 
-function scroll(direction){ //1 down, -1 up
-	window.scrollBy(0, window.innerHeight * direction);
+function scroll(direction="down"){ //1 down, -1 up
+	dirInt = direction == "down" ? 1 : -1;
+	console.log(dirInt);
+	window.scrollBy(0, window.innerHeight * dirInt);
 }
 
 function goTo(text){
 	if(text.includes(".")){
 		window.location.href = "http://" + text;
 	} else {
-		console.log(text);
+		text += "";
+		text = text.replace(/,/g, " ");
 		window.location.href = "https://www.google.com/search?q=" + text;
 	}
 }

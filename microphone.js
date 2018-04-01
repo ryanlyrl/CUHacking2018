@@ -3,11 +3,12 @@ var ignore_onend;
 var start_timestamp;
 var final_transcript = '';
 var commands = new Map();
-var unnecessaryWords = ["a","the","go","is","too","on","in","please"];
+var unnecessaryWords = ["a","the","go","is","too","on","in","please",""];
 var interim_span;
 var final_span;
 
-commands.set("press",clickButton);
+commands.set("click",clickButton);
+commands.set("press", clickButton);
 commands.set("scroll",scroll);
 commands.set("switch",switchTab);
 commands.set("open", openTab);
@@ -17,12 +18,13 @@ commands.set("back", prevPage);
 commands.set("previous", prevPage);
 commands.set("forward", nextPage);
 commands.set("to", goTo);
+commands.set("search", goTo);
+commands.set("find", goTo);
 
 if (!('webkitSpeechRecognition' in window)) {
   //upgrade();
-  console.log("no");
 } else {
-  console.log("yes");
+  console.log("Speech Recognition running...");
   //start_button.style.display = 'inline-block';
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
@@ -113,19 +115,24 @@ function doAction(s){
     if(commands.get(temp[i]) != undefined){
       if(temp.length == 1){
         commands.get(temp[i])();
+         final_transcript = '';
         return;
       }
       else if(temp.length == 2){
         commands.get(temp[i])(temp[1]);
+         final_transcript = '';
         return;
       }
       else if(temp.length > 2){
-        commands.get(temp[i])(temp[1]);
-        commands.log("Extra parameter: " + temp[2]);
-        return;
-      }
-      else {
-
+        if(temp[i] == "search" || temp[i] == "to" || temp[i] == "find"){
+          commands.get(temp[i])(temp.slice(1));
+          return;
+        } else {
+          commands.get(temp[i])(temp[1]);
+          console.log("Extra parameter: " + temp[2]);
+          final_transcript = '';
+          return;
+        }
       }
       //console.log("hi");
     }
