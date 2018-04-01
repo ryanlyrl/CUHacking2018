@@ -12,7 +12,7 @@ function clickButton(buttonText){
 		}
 	});
 
-	for(int i=0;i < matches.length;i++){ //TODO: highlight matches and let user choose?
+	for(var i=0;i < matches.length;i++){ //TODO: highlight matches and let user choose?
 		matches[i].click();
 	}
 }
