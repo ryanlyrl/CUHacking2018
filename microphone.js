@@ -20,6 +20,7 @@ commands.set("forward", nextPage);
 commands.set("to", goTo);
 commands.set("search", goTo);
 commands.set("find", goTo);
+commands.set("input", enterText);
 
 if (!('webkitSpeechRecognition' in window)) {
   //upgrade();
@@ -127,6 +128,8 @@ function doAction(s){
         if(temp[i] == "search" || temp[i] == "to" || temp[i] == "find"){
           commands.get(temp[i])(temp.slice(1));
           return;
+        } else if(temp[i] == "input"){
+          commands.get(temp[i])(temp[1], temp[2]);
         } else {
           commands.get(temp[i])(temp[1]);
           console.log("Extra parameter: " + temp[2]);

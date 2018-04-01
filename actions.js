@@ -52,17 +52,17 @@ function nextPage(){
 }
 
 function enterText(field, text){
+	console.log("Inputting");
 	$("input").each(function(){
-		var foundField;
-		$.each(this.attrbutes, function(){
-			if(this.value.toLowerCase().includes(field.toLowerCase)){
-				foundField = this;
-				return false;
+		//console.log("asdadwaf");
+		$.each(this.attributes, function(i, attribute){
+			//console.log("hello");
+			//console.log(attribute.value);
+			if(attribute.value.toLowerCase().includes(field.toLowerCase())){
+				console.log($("input[name="+attribute.value+"]"));
+				$("input["+attribute.name+"="+attribute.value+"]")["0"].value = text;
 			}
 		});
-		if(foundField){
-			foundField.val(text);
-		}
 	});
 }
 
