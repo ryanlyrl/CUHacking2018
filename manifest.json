@@ -1,7 +1,7 @@
   {
-    "name": "Speech Browser Control",
+    "name": "Voice Browser",
     "version": "1.0",
-    "description": "Build an Extension!",
+    "description": "An extension to use the browser with voice commands. Created in 24 hours as part of CUHacking 2018",
     "permissions": ["activeTab", "declarativeContent", "storage"],
     "background": {
     	"scripts": ["jquery-3.3.1.min.js", "background.js", "content.js"],
