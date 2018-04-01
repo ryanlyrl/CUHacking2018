@@ -1,13 +1,28 @@
 function clickButton(buttonText){
+	var matches = [];
 	$("a").each(function() {
-		if($(this).html().toLowerCase() == buttonText.toLowerCase){
-			$(this).click();
+		if($(this).html().toLowerCase().includes(buttonText)){
+			matches.append($(this));
 		}
 	});
+
+	$("input").each(function(){
+		if($(this).text().toLowerCase().includes(buttonText)){
+			matches.append($(this));
+		}
+	});
+
+	for(int i=0;i < matches.length;i++){ //TODO: highlight matches and let user choose?
+		matches[i].click();
+	}
+}
+
+function buttonPress(){
+	console.log("pressed!");
 }
 
 function scroll(direction){ //1 down, -1 up
-	window.scrollBy(window.innerHeight * direction);
+	window.scrollBy(0, window.innerHeight * direction);
 }
 
 function goTo(text){
