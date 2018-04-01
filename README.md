@@ -20,4 +20,5 @@ A few notes about usage:
 * **Go Back/Forward** - Goes to back/forward a page (equivalent to the browser's back and forward buttons).
 * **Click/Press/Find** - Clicks a link or button based on a keyword. For example, _Click submit_ will click a button with the text submit, if it exists.
 * **Go to** [_url_] - Navigates to specified URL. (e.g. _Go to google.com_, said as _Go to google dot com_).
-* **Search/Find** [_searchterm_] - Google searches for the specified term. Multiple words are accepted as the search term.
+* **Search/Find** [_searchTerm_] - Google searches for the specified term. Multiple words are accepted as the search term.
+* **Input** [_fieldName_] [_inputText_] - Inputs text into an input field (i.e. _Input email example@example.com_ would enter that email into an email field).
