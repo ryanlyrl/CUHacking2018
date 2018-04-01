@@ -4,8 +4,10 @@ var start_timestamp;
 var final_transcript = '';
 var commands = new Map();
 var unnecessaryWords = ["a","the","go","is","too","on","in","please"];
+var interim_span;
+var final_span;
 
-commands.set("click",clickButton);
+commands.set("press",clickButton);
 commands.set("scroll",scroll);
 commands.set("switch",switchTab);
 commands.set("open", openTab);
@@ -18,25 +20,27 @@ commands.set("to", goTo);
 
 if (!('webkitSpeechRecognition' in window)) {
   //upgrade();
+  console.log("no");
 } else {
-  start_button.style.display = 'inline-block';
+  console.log("yes");
+  //start_button.style.display = 'inline-block';
   var recognition = new webkitSpeechRecognition();
   recognition.continuous = true;
   recognition.interimResults = true;
   recognition.onstart = function() {
     recognizing = true;
-    start_img.src = 'mic-animate.gif';
+    //start_img.src = 'mic-animate.gif';
   };
   recognition.onend = function() { //stops the recording
     recognizing = false;
     if (ignore_onend) {
       return;
     }
-    start_img.src = 'mic.gif';
+    //start_img.src = 'mic.gif';
     /*if (!final_transcript) {
       return;
     }*/
-    showInfo('');
+   // showInfo('');
   };
   recognition.onresult = function(event) { //add to string
     var interim_transcript = '';
@@ -48,44 +52,48 @@ if (!('webkitSpeechRecognition' in window)) {
         interim_transcript += event.results[i][0].transcript;
       }
     }
-    final_span.innerHTML = linebreak(final_transcript);
-    interim_span.innerHTML = linebreak(interim_transcript); //outputs
+    final_span = linebreak(final_transcript);
+    interim_span = linebreak(interim_transcript); //outputs
     doAction(final_transcript);
   };
 }
 
 var two_line = /\n\n/g;
 var one_line = /\n/g;
+
+startButton();
+
 function linebreak(s) {
   return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
 }
-function startButton(event) {
+function startButton() {
   if (recognizing) {
     recognition.stop();
-    showInfo('info_allow');
+   // showInfo('info_allow');
     return;
   }
+  final_transcript = '';
   recognition.start();
   ignore_onend = false;
-  interim_span.innerHTML = '';
-  final_span.innerHTML = '';
-  start_img.src = 'mic-slash.gif';
+  interim_span = '';
+  final_span = '';
+  //start_img.src = 'mic-slash.gif';
 
-  showInfo('info_allow');
-  start_timestamp = event.timeStamp;
+  //showInfo('info_allow');
+  //start_timestamp = event.timeStamp;
 }
-function showInfo(s) {
-  if (s) {
-    for (var child = info.firstChild; child; child = child.nextSibling) {
-      if (child.style) {
-        child.style.display = child.id == s ? 'inline' : 'none';
-      }
-    }
-    info.style.visibility = 'visible';
-  } else {
-    info.style.visibility = 'hidden';
-  }
-}
+// function showInfo(s) {
+//   if (s) {
+//     for (var child = info.firstChild; child; child = child.nextSibling) {
+//       if (child.style) {
+//         child.style.display = child.id == s ? 'inline' : 'none';
+//       }
+//     }
+//     info.style.visibility = 'visible';
+//   } else {
+//     info.style.visibility = 'hidden';
+//   }
+// }
 
 function doAction(s){
   var temp = s.split(" ")

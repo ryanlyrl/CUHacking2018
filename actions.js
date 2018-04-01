@@ -1,20 +1,17 @@
 function clickButton(buttonText){
-	var matches = [];
+	console.log("clicked");
 	$("a").each(function() {
-		if($(this).html().toLowerCase().includes(buttonText)){
-			matches.append($(this));
+		console.log($(this).html());
+		if($(this).html().includes(buttonText)){
+			$(this).click();
 		}
 	});
 
-	$("input").each(function(){
+	$("button").each(function(){
 		if($(this).text().toLowerCase().includes(buttonText)){
-			matches.append($(this));
+			$(this).click();
 		}
 	});
-
-	for(var i=0;i < matches.length;i++){ //TODO: highlight matches and let user choose?
-		matches[i].click();
-	}
 }
 
 function buttonPress(){
