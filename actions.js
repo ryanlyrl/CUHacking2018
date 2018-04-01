@@ -1,4 +1,4 @@
-function clickButton(buttonText){
+function clickButton(buttonText, index){
 	var matches = [];
 	$("a").each(function() {	
 		if($(this).text().toLowerCase().includes(buttonText.toLowerCase())){
@@ -16,7 +16,7 @@ function clickButton(buttonText){
 		}
 	});
 
-	matches[0]["0"].click();
+	matches[index]["0"].click();
 	//}
 	// for(i = 0;i < matches.length;i++){
 	// 	matches[i]["0"].click();

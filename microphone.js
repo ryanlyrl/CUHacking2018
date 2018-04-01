@@ -6,6 +6,7 @@ var commands = new Map();
 var unnecessaryWords = ["a","the","go","is","too","on","in","please",""];
 var interim_span;
 var final_span;
+var button_temp;
 
 commands.set("click",clickButton);
 commands.set("press", clickButton);
@@ -99,7 +100,11 @@ function startButton() {
 
 function doAction(s){
   var temp = s.split(" ")
-
+  if(button_temp != "" && button_temp != undefined){
+      commands.get("click")(button_temp,final_transcript-1);
+      button_temp = "";
+      return;
+  }
   console.log("keys" + commands.values());
   for (var j = 0; j < s.length; j++){
     for (var i = 0; i < unnecessaryWords.length; i++)
@@ -111,7 +116,7 @@ function doAction(s){
   }
 
   for(var i=0; i< temp.length; i++){
-    console.log(temp);
+    //console.log(temp);
     if(commands.get(temp[i]) != undefined){
       if(temp.length == 1){
         commands.get(temp[i])();
@@ -119,8 +124,21 @@ function doAction(s){
         return;
       }
       else if(temp.length == 2){
+        if(commands.get(temp[i]) == clickButton){
+          button_temp = temp[1];
+          //startButton();
+          recognition.stop();
+          recognizing = false;
+          //final_transcript = '';
+          //recognition.start();
+          //ignore_onend = false;
+          //interim_span = '';
+          //final_span = '';
+          //commands.get(temp[i])(button_temp,final_transcript);
+          return;
+        }
         commands.get(temp[i])(temp[1]);
-         final_transcript = '';
+        final_transcript = '';
         return;
       }
       else if(temp.length > 2){
