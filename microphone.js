@@ -3,6 +3,7 @@ var ignore_onend;
 var start_timestamp;
 var final_transcript = '';
 var commands = new Map();
+var unnecessaryWords = ["a","the","go","is","too","on","in","please"];
 
 commands.set("click",clickButton);
 commands.set("scroll",scroll);
@@ -11,6 +12,10 @@ commands.set("open", openTab);
 commands.set("close",closeTab);
 commands.set("maximize", maximize)
 commands.set("back", prevPage);
+commands.set("previous", prevPage);
+commands.set("forward", nextPage);
+commands.set("to", goTo);
+
 if (!('webkitSpeechRecognition' in window)) {
   //upgrade();
 } else {
@@ -41,7 +46,7 @@ if (!('webkitSpeechRecognition' in window)) {
       }
       else{
         interim_transcript += event.results[i][0].transcript;
-      } 
+      }
     }
     final_span.innerHTML = linebreak(final_transcript);
     interim_span.innerHTML = linebreak(interim_transcript); //outputs
@@ -85,12 +90,37 @@ function showInfo(s) {
 function doAction(s){
   var temp = s.split(" ")
 
+  console.log("keys" + commands.values());
+  for (var j = 0; j < s.length; j++){
+    for (var i = 0; i < unnecessaryWords.length; i++)
+    {
+      if(unnecessaryWords[i] == temp[j]){
+        temp.splice(j,1);
+      }
+    }
+  }
+
   for(var i=0; i< temp.length; i++){
     console.log(temp);
     if(commands.get(temp[i]) != undefined){
-      console.log("hi");
-      commands.get(temp[i])();
+      if(temp.length == 1){
+        commands.get(temp[i])();
         return;
+      }
+      else if(temp.length == 2){
+        commands.get(temp[i])(temp[1]);
+        return;
+      }
+      else if(temp.length > 2){
+        commands.get(temp[i])(temp[1]);
+        commands.log("Extra parameter: " + temp[2]);
+        return;
+      }
+      else {
+
+      }
+      //console.log("hi");
     }
   }
+
 }
