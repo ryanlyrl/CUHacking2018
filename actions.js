@@ -29,7 +29,8 @@ function goTo(text){
 	if(text.includes(".")){
 		window.location.href = "http://" + text;
 	} else {
-		window.location.href = "https://www.google.com/search?q=" + query;
+		console.log(text);
+		window.location.href = "https://www.google.com/search?q=" + text;
 	}
 }
 
@@ -70,7 +71,7 @@ function switchTab(){
     	chrome.tabs.query({index: (tabsArray[0].index+1)}, function(nextTabsArray){
         	if( nextTabsArray.length < 1 ) return;
         	chrome.tabs.update(nextTabsArray[0].id, {active: true})
-    	});  
+    	});
 	});
 }
 
