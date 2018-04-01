@@ -19,5 +19,5 @@ A few notes about usage:
 * **Scroll** [_up_/_down_] - Scrolls the page up or down.
 * **Go Back/Forward** - Goes to back/forward a page (equivalent to the browser's back and forward buttons).
 * **Click/Press/Find** - Clicks a link or button based on a keyword. For example, _Click submit_ will click a button with the text submit, if it exists.
-* **Go to** [_url_] - Navigates to specified URL. (e.g. _Go to google.com_, said as _Go to google dot como_).
+* **Go to** [_url_] - Navigates to specified URL. (e.g. _Go to google.com_, said as _Go to google dot com_).
 * **Search/Find** [_searchterm_] - Google searches for the specified term. Multiple words are accepted as the search term.
