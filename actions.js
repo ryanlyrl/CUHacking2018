@@ -73,3 +73,7 @@ function switchTab(){
     	});  
 	});
 }
+
+function maximize(){
+	window.resizeTo(screen.width, screen.height);
+}
